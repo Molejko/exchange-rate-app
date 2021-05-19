@@ -8,14 +8,12 @@ const rateInfo = document.querySelector('.rate-info')
 
 const calculate = () => {
 
-    fetch(`https://api.ratesapi.io/api/latest?base=${currencyOne.value}&symbols=${currencyTwo.value}`)
+    fetch(`https://v6.exchangerate-api.com/v6/1c616793e20b99f6f280fdcf/pair/${currencyOne.value}/${currencyTwo.value}`)
     .then(res => res.json())
     .then(data => {
-        const currency1 = currencyOne.value;
-        const currency2 = currencyTwo.value;
 
-        const rate = data.rates[currency2];
-        rateInfo.textContent = `1 ${currency1} = ${rate.toFixed(4)} ${currency2}`;
+        const rate = data.conversion_rate;
+        rateInfo.textContent = `1 ${currencyOne.value} = ${rate.toFixed(4)} ${currencyTwo.value}`;
         amountTwo.value = (amountOne.value * rate).toFixed(2);
     })
 }
